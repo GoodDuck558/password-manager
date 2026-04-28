@@ -5,6 +5,8 @@ public class PasswordEntry {
     private String username;
     private String password;
 
+    public PasswordEntry() {}
+
     public PasswordEntry(String site, String username, String password){
         this.site = site;
         this.username = username;
