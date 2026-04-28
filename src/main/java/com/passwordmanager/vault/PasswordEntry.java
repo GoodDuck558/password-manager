@@ -23,4 +23,9 @@ public class PasswordEntry {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String toString() {
+        return site + " | " + username;
+    }
 }
