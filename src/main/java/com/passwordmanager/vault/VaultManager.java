@@ -24,6 +24,12 @@ public class VaultManager {
     public void addEntry(PasswordEntry entry) {
         entries.add(entry);
     }
+    public boolean removeEntry(String site, String username) {
+        return entries.removeIf(e ->
+                e.getSite().equalsIgnoreCase(site) &&
+                        e.getUsername().equalsIgnoreCase(username));
+        }
+
     public List<PasswordEntry> getEntries() {
         return new ArrayList<>(entries);
     }
@@ -67,6 +73,7 @@ public class VaultManager {
 
             // 5. Replace current entries (defensive copy)
             this.entries = new ArrayList<>(loadedEntries);
+
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to load vault", e);
