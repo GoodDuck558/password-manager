@@ -1,4 +1,4 @@
-# Password Manager
+# Password Manager v1.0
 ## About
 This is an app created on Java that works as a Password Manager, it uses AES256-GCM and PBKDF2 310000 iterations. Passwords inside this app is securely encrypted.
 
@@ -10,6 +10,8 @@ This is an app created on Java that works as a Password Manager, it uses AES256-
 -Copy password to clipboard (you have only 30 seconds before it gets deleted from clipboard)
 
 -Password generator
+
+- More to come
 
 ## Security
 -AES-256-GCM authenticated encryption
