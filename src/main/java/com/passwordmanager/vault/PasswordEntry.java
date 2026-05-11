@@ -26,6 +26,6 @@ public class PasswordEntry {
 
     @Override
     public String toString() {
-        return site + " | " + username;
+        return getSite() + " — " + getUsername();
     }
 }

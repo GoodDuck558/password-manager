@@ -46,10 +46,15 @@ public class AddEntryScreen {
 
         save.addActionListener(e -> {
 
+            if (site.getText().trim().isEmpty() || username.getText().trim().isEmpty() || password.getPassword().length == 0) {
+                JOptionPane.showMessageDialog(frame, "All fields are required.");
+                return;
+            }
             PasswordEntry entry = new PasswordEntry(
                     site.getText(),
                     username.getText(),
                     new String(password.getPassword())
+
             );
 
             AppState.vault.addEntry(entry);
