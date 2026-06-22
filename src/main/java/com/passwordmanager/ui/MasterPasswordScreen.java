@@ -1,6 +1,7 @@
 package com.passwordmanager.ui;
 
 import com.passwordmanager.ui.AppState;
+import com.passwordmanager.util.AppConfig;
 import com.passwordmanager.vault.VaultManager;
 
 import javax.swing.*;
@@ -19,20 +20,22 @@ public class MasterPasswordScreen {
         JPasswordField field = new JPasswordField();
         JButton login = new JButton("Unlock");
 
+        String vaultPath = AppConfig.getVaultPath();
+
         login.addActionListener(e -> {
             try {
                 char[] password = field.getPassword();
 
                 VaultManager vault = new VaultManager();
 
-                File file = new File("vault.dat");
+                File file = new File(vaultPath);
 
                 if (file.exists()) {
-                    vault.load("vault.dat", password);
+                    vault.load(vaultPath, password);
                 } else {
                     // first run → create empty vault
                     vault = new VaultManager();
-                    vault.save("vault.dat", password);
+                    vault.save(vaultPath, password);
                 }
 
                 AppState.vault = vault;
