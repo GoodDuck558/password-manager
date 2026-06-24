@@ -1,6 +1,7 @@
 package com.passwordmanager.ui;
 
 import com.passwordmanager.ui.AppState;
+import com.passwordmanager.util.AppConfig;
 import com.passwordmanager.vault.PasswordEntry;
 import com.passwordmanager.util.PasswordGenerator;
 
@@ -60,7 +61,7 @@ public class AddEntryScreen {
             AppState.vault.addEntry(entry);
 
             try {
-                AppState.vault.save("vault.dat", AppState.masterPassword);
+                AppState.vault.save(AppConfig.getVaultPath(), AppState.masterPassword);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
