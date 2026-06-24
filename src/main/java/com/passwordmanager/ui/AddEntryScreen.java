@@ -14,7 +14,7 @@ public class AddEntryScreen {
 
     public AddEntryScreen(JFrame frame, DefaultListModel<PasswordEntry> model) {
 
-        panel.setLayout(new GridLayout(6, 1));
+        panel.setLayout(new GridLayout(8, 1));
 
         JTextField site = new JTextField();
         site.setBorder(BorderFactory.createTitledBorder("Website"));
@@ -73,10 +73,20 @@ public class AddEntryScreen {
             frame.revalidate();
             frame.repaint();
         });
+        JLabel lengthLabel = new JLabel("Password Length: 16", SwingConstants.CENTER);
 
+        JSlider lengthSlider = new JSlider(12, 128, 16);
+        lengthSlider.setMajorTickSpacing(16);
+        lengthSlider.setMinorTickSpacing(4);
+        lengthSlider.setPaintTicks(true);
+        lengthSlider.setPaintLabels(true);
+
+        lengthSlider.addChangeListener(e ->
+                lengthLabel.setText("Password Length: " + lengthSlider.getValue())
+        );
         JButton generateBtn = new JButton("Generate Password");
         generateBtn.addActionListener(e -> {
-            String generated = PasswordGenerator.generatePassword(16);
+            String generated = PasswordGenerator.generatePassword(lengthSlider.getValue());
             password.setText(generated);
         });
 
@@ -84,8 +94,13 @@ public class AddEntryScreen {
         panel.add(username);
         panel.add(password);
         panel.add(toggleVisibility);
-        panel.add(save);
+
+        panel.add(lengthLabel);
+        panel.add(lengthSlider);
+
         panel.add(generateBtn);
+        panel.add(save);
+
     }
 
     public JPanel getPanel() {
