@@ -27,7 +27,7 @@ public class MainScreen {
 
         JButton add = new JButton("Add Entry");
         JButton copy = new JButton("Copy Password");
-        JButton delete = new JButton("Delete Entry"); // ✅ new button
+        JButton delete = new JButton("Delete Entry");
 
         add.addActionListener(e -> {
             AddEntryScreen addScreen = new AddEntryScreen(frame, model);
