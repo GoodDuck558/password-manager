@@ -1,6 +1,7 @@
 package com.passwordmanager.ui;
 
 import com.passwordmanager.ui.AppState;
+import com.passwordmanager.util.AppConfig;
 import com.passwordmanager.util.ClipboardManager;
 import com.passwordmanager.vault.PasswordEntry;
 
@@ -60,7 +61,7 @@ public class MainScreen {
                     model.removeElement(selected);
 
                     try {
-                        AppState.vault.save("vault.dat", AppState.masterPassword);
+                        AppState.vault.save(AppConfig.getVaultPath(), AppState.masterPassword);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frame, "Failed to save vault after deletion.");
                     }// remove from UI

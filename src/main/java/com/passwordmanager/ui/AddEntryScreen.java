@@ -127,6 +127,7 @@ public class AddEntryScreen {
         panel.add(toggleVisibility);
         panel.add(strengthLabel);
 
+
         panel.add(lengthLabel);
         panel.add(lengthSlider);
 
