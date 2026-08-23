@@ -2,37 +2,35 @@ package com.passwordmanager.crypto;
 
 import javax.crypto.*;
 import java.security.*;
-import java.security.spec.InvalidKeySpecException;
 import javax.crypto.spec.*;
 import java.util.Arrays;
+import org.bouncycastle.crypto.generators.Argon2BytesGenerator;
+import org.bouncycastle.crypto.params.Argon2Parameters;
 
 public class CryptoManager {
+    private static final int ARGON2_MEMORY_KIB = 524288;
+    private static final int ARGON2_ITERATIONS = 2;
+    private static final int ARGON2_PARALLELISM = 4;
+    private static final int KEY_LENGTH = 32;
     private static final int SALT_LENGTH = 16;
     private static final int IV_LENGTH = 12;
-    private static final int PBKDF2_ITER = 310000;
-    private static final int KEY_LENGTH = 256;
 
-    public static SecretKey deriveKey(char[] password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        PBEKeySpec spec = null;
-        try {
-            // 1. Create PBEKeySpec
-            spec = new PBEKeySpec(password, salt, PBKDF2_ITER, KEY_LENGTH);
+    public static SecretKey deriveKey(char[] password, byte[] salt) {
+        Argon2Parameters params = new Argon2Parameters.Builder(Argon2Parameters.ARGON2_id)
+                .withVersion(Argon2Parameters.ARGON2_VERSION_13)
+                .withIterations(ARGON2_ITERATIONS)
+                .withMemoryAsKB(ARGON2_MEMORY_KIB)
+                .withParallelism(ARGON2_PARALLELISM)
+                .withSalt(salt)
+                .build();
 
-            // 2. Create SecretKeyFactory
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        Argon2BytesGenerator generator = new Argon2BytesGenerator();
+        generator.init(params);
 
-            // 3. Generate raw key bytes
-            byte[] keyBytes = factory.generateSecret(spec).getEncoded();
+        byte[] keyBytes = new byte[KEY_LENGTH];
+        generator.generateBytes(password, keyBytes);
 
-            // 4. Return AES key
-            return new SecretKeySpec(keyBytes, "AES");
-        } catch (InvalidKeySpecException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (spec != null) {
-                spec.clearPassword();
-            }
-        }
+        return new SecretKeySpec(keyBytes, "AES");
     }
 
     public static byte[] generateRandom(int length) {
