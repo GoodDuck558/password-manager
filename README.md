@@ -26,3 +26,19 @@ A local password manager built in Java, using AES-256-GCM for encryption and Arg
 - Maven 3.x.x
 
 ## How to Build
+git clone https://github.com/GoodDuck558/password-manager.git
+cd password-manager
+mvn package
+
+
+## How to Run
+
+java -jar target/password-manager-2.0.1.jar
+
+
+## Roadmap
+- Add Linux support (in progress)
+- Auto-lock on inactivity (in progress)
+- Migrate stored password fields from `String` to `char[]`
+- v3: JavaFX UI rewrite
+- More to come
