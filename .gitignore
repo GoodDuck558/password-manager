@@ -5,3 +5,5 @@ out/
 dependency-reduced-pom.xml
 vault.dat
 *.dat
+*.key
+*.vault
