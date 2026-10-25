@@ -37,7 +37,7 @@ java -jar target/password-manager-2.0.1.jar
 
 
 ## Roadmap
-- Add Linux support (in progress)
+- Add Linux support (Completed)
 - Auto-lock on inactivity (in progress)
 - Migrate stored password fields from `String` to `char[]`
 - v3: JavaFX UI rewrite
